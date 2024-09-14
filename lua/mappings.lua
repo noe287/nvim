@@ -17,8 +17,13 @@ local map = vim.keymap.set
 -- local setopt = vim.opt
 local nmap = vim.api.nvim_set_keymap
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jj", "<ESC>")
+map("n", ";", ":", { desc = "CMD enter command mode"})
+map("i", "jj", "<ESC>", { desc = "Enter Normal mode"})
+map("n", "g=", "$", { desc = "Go to the end of the line"})
+map("n", "g-", "g_", { desc = "Go to the last character of the line"})
+map("n", "h1", "0", { desc = "Go to the beginning of the line"})
+map("n", "h2", "^", { desc = "Go to the first character of the line"})
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -----------------------------------------------------------------------------------------
@@ -47,24 +52,27 @@ map("i", "jj", "<ESC>")
 ----------------------------------------------------------------------------------------
 --- Save and Close all the windows
 map("n", "<C-d>", ":qa! <CR>", {desc = "Close NVIM without saving"})
+map("v", "<C-d>", ":qa! <CR>", {desc = "Close NVIM without saving"})
+map("x", "<C-d>", ":qa! <CR>", {desc = "Close NVIM without saving"})
 --- Close all the windows without saving
 map("n", "<C-a>", ":wqa! <CR>", {desc = "Save and Close NVIM"})
 -- Switch to normal mode and then save the file, in all modes.
-map("i", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File"})
-map("v", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File"})
-map("x", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File"})
+map("i", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File in insert mode"})
+map("v", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File in visual mode"})
+map("x", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File in visual block mode"})
 --- Modify default setting to switch between split windows as below
 nmap("n", "<C-h>", "<C-w>h", {desc = "Switch to Left pane"})
 nmap("n", "<C-j>", "<C-w>j", {desc = "Switch to up pane"})
 nmap("n", "<C-k>", "<C-w>k", {desc = "Switch to down pane"})
 nmap("n", "<C-l>", "<C-w>l", {desc = "Switch to right pane"})
 -- Resize split windows:
-map("n", "<C-w><F10>", ":resize -10<CR>", {desc = "Resize Horizontal pane -10"})
-map("n", "<C-w><F11>", ":resize +10<CR>", {desc = "Resize Horizontal pane +10"})
-map("n", "<C-w><F9>", ":vertical resize -10<CR>", {desc = "Resize Vertical pane -10"})
-map("n", "<C-w><F12>", ":vertical resize +10<CR>", {desc = "Resize Vertical pane +10"})
+map("n", "<C-w><F5>", ":resize -10<CR>", {desc = "Resize Horizontal pane -10"})
+map("n", "<C-w><F8>", ":resize +10<CR>", {desc = "Resize Horizontal pane +10"})
+map("n", "<C-w><F6>", ":vertical resize -10<CR>", {desc = "Resize Vertical pane -10"})
+map("n", "<C-w><F7>", ":vertical resize +10<CR>", {desc = "Resize Vertical pane +10"})
 -- Close the current window
 nmap("n", "<C-x>", "<C-w>q", {desc = "Close the current window"})
+nmap("n", "<leader>i", "<M-i>", {desc = "Mid-screen floating terminal"})
 -- map("n", "gd", ":Telescope lsp_definition<CR>")
 -- Insert empty line without entering insert mode
 map('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<CR>', {desc = "Insert empty line below: Normal Mode"})
@@ -89,22 +97,28 @@ map('n', 'U', '<C-r>', {desc = "Redo last change"})
 -- use <C-N> and <C-P> for next/prev.
 -- map("n", "<C-N>", "<CMD>QNext<CR>", opts)
 -- map("n", "<C-P>", "<CMD>QPrev<CR>", opts)
--- toggle the quickfix open/closed without jumping to it
+-- Toggle the quickfix open/closed without jumping to it
 map("n", "<leader>q", "<CMD>QFToggle!<CR>", {desc = "Toggle Quickfix"})
 map("n", "<leader>l", "<CMD>LLToggle!<CR>", {desc = "Toggle DiagnosticQickfix"})
 -- Toggle see whitespace characters like: eol, space, ...
-map('n', '<F6>', ':set list!<cr>', {desc = "Toogle invible characters in the file"})
+map('n', '<F5>', ':set list!<cr>', {desc = "Toogle invible characters in the file"})
+map('i', '<F5>', '<ESC>:set list!<cr>', {desc = "Toogle invible characters in the file"})
 -- Toggle SymbolList
 map('n', '\\', ':SymbolsOutline<CR>', {desc = "SymbolistToggle"})
 -- Toggle Paste
 -- map('n', '<F5>', ':set paste!<cr>', opts)
 -- map('i', '<F5>', '<ESC>:set paste!<cr>', opts)
 -- Alt/Meta + c to capitalize the first character of an inner word
-map('n', '<M-c>', 'guiw~w', {desc = "Capitalize the first C of a word"})
+map('n', '<M-c>', 'guiw~w', {desc = "Capitalize the first Char of a word"})
 -- Alt/Meta + u to uppercase the inner word
 map('n', '<M-u>', 'gUiww', {desc = "Capitalize the word"})
 -- Alt/Meta + l to lowercase the inner word
 map('n', '<M-l>', 'guiww',{desc = "Lowercase the word"})
+
+-- Tooggle blame window/virtual info
+map("n", "<leader>bv", "<CMD>BlameToggle window<CR>", {desc = "Toggle Blame Window"})
+map("n", "<leader>bn", "<CMD>BlameToggle virtual<CR>", {desc = "Toggle Blame Virtual Pane"})
+
 
 
 -- Fast searching text under cursor with Goole with Ctrl+q Ctrl+g
@@ -142,9 +156,7 @@ function Toggle_diagnostics()
         vim.diagnostic.enable()
     end
 end
-
 map('n', '<leader>xd', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle Vim diagnostics" })
-
 -----------------------------------------------------------------------------------------
 -- END Keymaps
 -----------------------------------------------------------------------------------------

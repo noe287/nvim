@@ -1,7 +1,53 @@
 return {
 
-    "tpope/vim-fugitive",
-    "vim-scripts/a.vim",
+    -- "tpope/vim-fugitive",
+    -- "vim-scripts/a.vim",
+    {
+        -- Adds git releated signs to the gutter, as well as utilities for managing changes
+        'lewis6991/gitsigns.nvim',
+        event = "VeryLazy",
+        opts = {
+          -- See `:help gitsigns.txt`
+          signs = {
+            add = { text = '+' },
+            change = { text = '~' },
+            delete = { text = '_' },
+            topdelete = { text = '‾' },
+            changedelete = { text = '~' },
+          },
+          on_attach = function(bufnr)
+          local gitsigns = require('gitsigns')
+          -- vim.keymap.set('n', '[c', gitsigns.prev_hunk, { buffer = bufnr, desc = 'Go to Previous Hunk' })
+          -- vim.keymap.set('n', ']c', gitsigns.next_hunk, { buffer = bufnr, desc = 'Go to Next Hunk' })
+          -- vim.keymap.set('n', '<leader>ph', gitsigns.preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+          --   -- Actions
+          -- vim.keymap.set('n', '<leader>hs', gitsigns.stage_hunk)
+          -- vim.keymap.set('n', '<leader>hr', gitsigns.reset_hunk)
+          -- vim.keymap.set('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+          -- vim.keymap.set('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+          -- vim.keymap.set('n', '<leader>hS', gitsigns.stage_buffer)
+          -- vim.keymap.set('n', '<leader>hu', gitsigns.undo_stage_hunk)
+          -- vim.keymap.set('n', '<leader>hR', gitsigns.reset_buffer)
+          -- vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk)
+          vim.keymap.set('n', '<S-X>', function() gitsigns.blame_line{full=true} end)
+          vim.keymap.set('n', '<S-B>', gitsigns.toggle_current_line_blame)
+          vim.keymap.set('n', '<S-T>', gitsigns.diffthis)
+          vim.keymap.set('n', '<S-H>', function() gitsigns.diffthis('~') end)
+          vim.keymap.set('n', '<S-D>', gitsigns.toggle_deleted)
+          vim.keymap.set('n', '<S-G>', gitsigns.blame)
+          vim.keymap.set('n', '<S-L>', gitsigns.blame_line)
+        -- Text object
+          -- vim.keymap.set({'o', 'x'}, 'ih', ':<S-U>Gitsigns select_hunk<CR>')
+          end,
+        },
+    },
+    {
+      'FabijanZulj/blame.nvim',
+        event = "VeryLazy",
+        opts = {
+            blame_options = { '-w' },
+        },
+    },
     {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPre", "BufNewFile" },

@@ -19,7 +19,7 @@ autocmd('BufWritePre', {
     pattern = '',
     command = ":%s/\\s\\+$//e"
 })
--- Don't auto commenting new lines
+-- Don't auto comment new lines
 autocmd('BufEnter', {
     group = "NoeGroup",
     pattern = '',
@@ -31,6 +31,7 @@ autocmd('TermOpen', {
     command = 'setlocal listchars= nonumber norelativenumber nocursorline',
 })
 
+-- Start with a clean jump table that is populated with c-o/c-i
 autocmd('VimEnter', {
     group = "NoeGroup",
     command = 'clearjumps',
@@ -71,13 +72,12 @@ local function open_nvim_tree()
     require("nvim-tree.api").tree.open()
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
 
 -----------------------------------------------------------------------------------------
 -- Nvim-Tree END
 -----------------------------------------------------------------------------------------
-
-
 
 
 
