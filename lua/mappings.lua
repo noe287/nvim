@@ -66,17 +66,19 @@ nmap("n", "<C-j>", "<C-w>j", {desc = "Switch to up pane"})
 nmap("n", "<C-k>", "<C-w>k", {desc = "Switch to down pane"})
 nmap("n", "<C-l>", "<C-w>l", {desc = "Switch to right pane"})
 -- Resize split windows:
-map("n", "<C-w><F5>", ":resize -10<CR>", {desc = "Resize Horizontal pane -10"})
-map("n", "<C-w><F8>", ":resize +10<CR>", {desc = "Resize Horizontal pane +10"})
-map("n", "<C-w><F6>", ":vertical resize -10<CR>", {desc = "Resize Vertical pane -10"})
-map("n", "<C-w><F7>", ":vertical resize +10<CR>", {desc = "Resize Vertical pane +10"})
+map("n", "<C-w><F7>", ":resize -10<CR>", {desc = "Resize Horizontal pane -10"})
+map("n", "<C-w><F6>", ":resize +10<CR>", {desc = "Resize Horizontal pane +10"})
+map("n", "<C-w><F8>", ":vertical resize -10<CR>", {desc = "Resize Vertical pane -10"})
+map("n", "<C-w><F5>", ":vertical resize +10<CR>", {desc = "Resize Vertical pane +10"})
 -- Close the current window
 nmap("n", "<C-x>", "<C-w>q", {desc = "Close the current window"})
-nmap("n", "<leader>i", "<M-i>", {desc = "Mid-screen floating terminal"})
+nmap("n", "<C-w>m", "<M-i>", {desc = "Mid-screen floating terminal"})
 -- map("n", "gd", ":Telescope lsp_definition<CR>")
 -- Insert empty line without entering insert mode
-map('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<CR>', {desc = "Insert empty line below: Normal Mode"})
-map('n', '<leader>O', ':<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>', {desc = "Insert empty line in above: Normal Mode"})
+map('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<CR>',
+    {desc = "Insert empty line below: Normal Mode"})
+map('n', '<leader>O', ':<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>',
+    {desc = "Insert empty line in above: Normal Mode"})
 -- Needed to remap these as c-i did not work for some reason.
 map('n', '<C-o>', '<C-o>', {desc = "Jump forward"})
 map('n', '<C-i>', '<C-i>', {desc = "Jump backward"})
