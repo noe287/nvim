@@ -11,7 +11,7 @@ require "nvchad.mappings"
 --- command_mode:"c",
 -----------------------------------------------------------------------------------------
 
-local opts = { noremap = true, silent = true }
+-- local opts = { noremap = true, silent = true }
 -- Shorten function name
 local map = vim.keymap.set
 -- local setopt = vim.opt
@@ -23,9 +23,20 @@ map("n", "g=", "$", { desc = "Go to the end of the line"})
 map("n", "g-", "g_", { desc = "Go to the last character of the line"})
 map("n", "h1", "0", { desc = "Go to the beginning of the line"})
 map("n", "h2", "^", { desc = "Go to the first character of the line"})
+map("v", "g=", "$", { desc = "Go to the end of the line"})
+map("v", "g-", "g_", { desc = "Go to the last character of the line"})
+map("v", "h1", "0", { desc = "Go to the beginning of the line"})
+map("v", "h2", "^", { desc = "Go to the first character of the line"})
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
-
+-- When the focus is on an internal terminal window. Floating or otherwise
+map("t", "<C-h>", "<cmd>wincmd h<CR>")
+map("t", "<C-j>", "<cmd>wincmd j<CR>")
+map("t", "<C-k>", "<cmd>wincmd k<CR>")
+map("t", "<C-l>", "<cmd>wincmd l<CR>")
+nmap("n", "<leader>j", "<M-i>", {desc = "Mid-screen floating terminal open"})
+nmap("v", "<leader>j", "<M-i>", {desc = "Mid-screen floating terminal open"})
+nmap("t", "<leader>j", "<M-i>", {desc = "Mid-screen floating terminal close"})
 -----------------------------------------------------------------------------------------
 -- Folding Keybindings
 -----------------------------------------------------------------------------------------
@@ -72,7 +83,6 @@ map("n", "<C-w><F8>", ":vertical resize -10<CR>", {desc = "Resize Vertical pane 
 map("n", "<C-w><F5>", ":vertical resize +10<CR>", {desc = "Resize Vertical pane +10"})
 -- Close the current window
 nmap("n", "<C-x>", "<C-w>q", {desc = "Close the current window"})
-nmap("n", "<C-w>m", "<M-i>", {desc = "Mid-screen floating terminal"})
 -- map("n", "gd", ":Telescope lsp_definition<CR>")
 -- Insert empty line without entering insert mode
 map('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<CR>',
