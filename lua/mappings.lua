@@ -12,6 +12,7 @@ require "nvchad.mappings"
 -----------------------------------------------------------------------------------------
 
 -- local opts = { noremap = true, silent = true }
+
 -- Shorten function name
 local map = vim.keymap.set
 -- local setopt = vim.opt
