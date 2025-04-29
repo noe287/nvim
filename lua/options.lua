@@ -28,8 +28,8 @@ o.mouse = 'a'                       -- Enable mouse support
 -- -- Neovim UI
 -- -----------------------------------------------------------
 -- o.number = true           -- Show line number
- o.showmatch = true        -- Highlight matching parenthesis
--- o.foldmethod = 'marker'   -- Enable folding (default 'foldmarker')
+o.showmatch = true        -- Highlight matching parenthesis
+-- o.foldmethod = 'syntax'   -- Enable folding (default 'foldmarker')
 -- o.colorcolumn = '80'      -- Line lenght marker at 80 columns
 -- o.splitright = true       -- Vertical split to the right
 -- o.splitbelow = true       -- Horizontal split to the bottom

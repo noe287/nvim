@@ -75,6 +75,17 @@ end
 autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 
+-- autocmd({ "FileType" }, {
+--   callback = function()
+--     if require("nvim-treesitter.parsers").has_parser() then
+--       vim.opt.foldmethod = "expr"
+--       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+--     else
+--       vim.opt.foldmethod = "syntax"
+--     end
+--   end,
+-- })
+--
 -----------------------------------------------------------------------------------------
 -- Nvim-Tree END
 -----------------------------------------------------------------------------------------

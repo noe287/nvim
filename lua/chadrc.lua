@@ -9,7 +9,7 @@
 local M = {}
 
 -- M.ui = {
---     theme = "bearded-arc",
+--     theme = "ayu_dark",
 --     statusline = {
 --         separator_style = "arrow",
 --         overriden_modules = function()
@@ -55,7 +55,7 @@ local M = {}
 
 
 M.ui = {
-    theme = "bearded-arc",
+    theme = "ayu_dark",
     -- transparency = "true"
     statusline = {
         separator_style = "arrow",

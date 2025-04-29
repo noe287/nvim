@@ -37,6 +37,12 @@ map("t", "<C-l>", "<cmd>wincmd l<CR>")
 nmap("n", "<leader>j", "<M-i>", {desc = "Mid-screen floating terminal open"})
 nmap("v", "<leader>j", "<M-i>", {desc = "Mid-screen floating terminal open"})
 nmap("t", "<leader>j", "<M-i>", {desc = "Mid-screen floating terminal close"})
+nmap("n", "<leader>h", "<M-h>", {desc = "Horizontal terminal close"})
+nmap("t", "<leader>h", "<M-h>", {desc = "Horizontal terminal close"})
+nmap("v", "<leader>h", "<M-h>", {desc = "Horizontal terminal close"})
+nmap("n", "<leader>v", "<M-v>", {desc = "Vertical terminal close"})
+nmap("t", "<leader>v", "<M-v>", {desc = "Vertical terminal close"})
+nmap("v", "<leader>v", "<M-v>", {desc = "Vertical terminal close"})
 -----------------------------------------------------------------------------------------
 -- Folding Keybindings
 -----------------------------------------------------------------------------------------
@@ -65,46 +71,59 @@ nmap("t", "<leader>j", "<M-i>", {desc = "Mid-screen floating terminal close"})
 map("n", "<C-d>", ":qa! <CR>", {desc = "Close NVIM without saving"})
 map("v", "<C-d>", ":qa! <CR>", {desc = "Close NVIM without saving"})
 map("x", "<C-d>", ":qa! <CR>", {desc = "Close NVIM without saving"})
+
 --- Close all the windows without saving
 map("n", "<C-a>", ":wqa! <CR>", {desc = "Save and Close NVIM"})
+
 -- Switch to normal mode and then save the file, in all modes.
 map("i", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File in insert mode"})
 map("v", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File in visual mode"})
 map("x", "<C-s>", "<ESC>+:w! <CR>", {desc = "Save File in visual block mode"})
+
 --- Modify default setting to switch between split windows as below
 nmap("n", "<C-h>", "<C-w>h", {desc = "Switch to Left pane"})
 nmap("n", "<C-j>", "<C-w>j", {desc = "Switch to up pane"})
 nmap("n", "<C-k>", "<C-w>k", {desc = "Switch to down pane"})
 nmap("n", "<C-l>", "<C-w>l", {desc = "Switch to right pane"})
+
 -- Resize split windows:
 map("n", "<C-w><F7>", ":resize -10<CR>", {desc = "Resize Horizontal pane -10"})
 map("n", "<C-w><F6>", ":resize +10<CR>", {desc = "Resize Horizontal pane +10"})
-map("n", "<C-w><F8>", ":vertical resize -10<CR>", {desc = "Resize Vertical pane -10"})
 map("n", "<C-w><F5>", ":vertical resize +10<CR>", {desc = "Resize Vertical pane +10"})
+map("n", "<C-w><F8>", ":vertical resize -10<CR>", {desc = "Resize Vertical pane -10"})
+
 -- Close the current window
 nmap("n", "<C-x>", "<C-w>q", {desc = "Close the current window"})
+
 -- map("n", "gd", ":Telescope lsp_definition<CR>")
 -- Insert empty line without entering insert mode
 map('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<CR>',
     {desc = "Insert empty line below: Normal Mode"})
 map('n', '<leader>O', ':<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>',
     {desc = "Insert empty line in above: Normal Mode"})
+
 -- Needed to remap these as c-i did not work for some reason.
 map('n', '<C-o>', '<C-o>', {desc = "Jump forward"})
 map('n', '<C-i>', '<C-i>', {desc = "Jump backward"})
+
 -- Remap sroll down and scroll up and center the result
 map('n', ',', '<C-u>zz', {desc = "Scroll Up"})
 map('n', 'm', '<C-d>zz', {desc = "Scroll Down"})
 map('n', 'M', 'mzz', {desc = "Go to Midline"})
+
 -- Select all
 map("n", "==", "gg<S-v>G", {desc = "Select All"})
+
 -- Paste without overwriting register
 map("v", "p", '"_dP', {desc = "Paste without overwriting register"})
+
 -- Replace word under cursor across entire buffer
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Replace word under cursor in the whole file" })
+
 -- Use U for redo :))
 map('n', 'U', '<C-r>', {desc = "Redo last change"})
+
 -- Tooggle QFIX window
 -- use <C-N> and <C-P> for next/prev.
 -- map("n", "<C-N>", "<CMD>QNext<CR>", opts)
@@ -112,11 +131,14 @@ map('n', 'U', '<C-r>', {desc = "Redo last change"})
 -- Toggle the quickfix open/closed without jumping to it
 map("n", "<leader>q", "<CMD>QFToggle!<CR>", {desc = "Toggle Quickfix"})
 map("n", "<leader>l", "<CMD>LLToggle!<CR>", {desc = "Toggle DiagnosticQickfix"})
+
 -- Toggle see whitespace characters like: eol, space, ...
 map('n', '<F5>', ':set list!<cr>', {desc = "Toogle invible characters in the file"})
 map('i', '<F5>', '<ESC>:set list!<cr>', {desc = "Toogle invible characters in the file"})
+
 -- Toggle SymbolList
 map('n', '\\', ':SymbolsOutline<CR>', {desc = "SymbolistToggle"})
+
 -- Toggle Paste
 -- map('n', '<F5>', ':set paste!<cr>', opts)
 -- map('i', '<F5>', '<ESC>:set paste!<cr>', opts)
@@ -130,8 +152,6 @@ map('n', '<M-l>', 'guiww',{desc = "Lowercase the word"})
 -- Tooggle blame window/virtual info
 map("n", "<leader>bv", "<CMD>BlameToggle window<CR>", {desc = "Toggle Blame Window"})
 map("n", "<leader>bn", "<CMD>BlameToggle virtual<CR>", {desc = "Toggle Blame Virtual Pane"})
-
-
 
 -- Fast searching text under cursor with Goole with Ctrl+q Ctrl+g
 -- I am using ArchLinux so I use the xdg-open command
@@ -169,6 +189,7 @@ function Toggle_diagnostics()
     end
 end
 map('n', '<leader>xd', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle Vim diagnostics" })
+
 -----------------------------------------------------------------------------------------
 -- END Keymaps
 -----------------------------------------------------------------------------------------
